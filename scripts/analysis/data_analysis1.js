@@ -11,16 +11,19 @@ $(document).ready(function(){
         var menuarr = ["Agriculture","Livestock","Fishery","Trade","General Information"];
         var arrayCounter = 0;
         $.each( data.reportTables, function( key, value ) {
-            var arr = value.name.split(':');
-            if(arr.length != 1){
-                if($.inArray(arr[0], menuarr) == -1){
-                    var len = menuarr.length -1;
-                    menuarr[len] = arr[0];
-                    menuarr[menuarr.length] = "General Information";
-                    mainmenu[arrayCounter] = arr[0];
-                    arrayCounter++;
+            if ( value && value.name){
+                var arr = value.name.split(':');
+                if(arr.length != 1){
+                    if($.inArray(arr[0], menuarr) == -1){
+                        var len = menuarr.length -1;
+                        menuarr[len] = arr[0];
+                        menuarr[menuarr.length] = "General Information";
+                        mainmenu[arrayCounter] = arr[0];
+                        arrayCounter++;
+                    }
                 }
             }
+
         });
         var menu ="";
         var menu1 ="";

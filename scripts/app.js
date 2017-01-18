@@ -7,11 +7,14 @@ var home = angular.module('news',
                         'ngRoute',
                         'ngCookies',
                         'ngSanitize',
+                        'highcharts-ng',
+                        'ngCsv',
                         'newsDirectives',
+                        'chartServices',
                         'newsControllers',
-                        'feeds',
                         'newsServices',
                         'newsFilters',
+                        'multi-select-tree',
                         'd2Directives',
                         'd2Services',
                         'd2Controllers',
@@ -33,6 +36,14 @@ var home = angular.module('news',
         }).when('/analysis', {
             templateUrl: "views/analysis.html",
             controller: 'analysisController'
+        })
+        .when('/:tab/menu/:menuId/favourite/:favourite', {
+            templateUrl: "views/analysis.html",
+            controller: 'analysisController'
+        })
+        .when('/:tab/menu/:menuId/favourite/:favourite/period/:period/orgunit/:orgunit/dx/:dx/type/:type/category/:category', {
+            templateUrl: "views/analysis.html",
+            controller: 'analysisDataController'
         })
         .otherwise('/');
     $translateProvider.preferredLanguage('en');

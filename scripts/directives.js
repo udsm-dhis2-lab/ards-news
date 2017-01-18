@@ -71,18 +71,55 @@ homeDirectives.directive("homeRightMenu", ['homeService',function(homeService){
     };
 }]);
 
-homeDirectives.directive("homeLeftMenu", ['homeService','utilityService',function(homeService,utilityService){
+homeDirectives.directive("homeLeftMenu", ['homeService','utilityService','$location',function(homeService,utilityService,$location){
     return {
         restrict: "E",
         replace: true,
         scope: {
             reportTables: "=reportTables",
             documentObject: "=documentObject",
+            tab: "=tabs",
+            menu: "=menu",
+            favourite: "=favourite"
         },
         templateUrl: "views/directives/home_left_menu.html",
         link: function($scope, element, attrs) {
             $scope.error  = false;
             $scope.errorMessage  = "no document found";
+
+
+
+            $scope.openTab = {};
+            $scope.openChildTab = {};
+            $scope.statusClass = {};
+            $scope.openTab['analysis'] = true;
+            $scope.openAccordion = function(parentElement,childElement){
+
+                if ( !$scope.openTab[parentElement] ) {
+                    $scope.openTab = {};
+                    $scope.statusClass = {};
+                    $scope.openTab[parentElement] = true;
+                    $scope.statusClass[$scope.favourite] = "alert-success";
+                }
+
+                if ( !$scope.openChildTab[childElement] && childElement != "" ) {
+                    $scope.openChildTab = {};
+                    $scope.statusClass = {};
+                    $scope.openChildTab[childElement] = true;
+                    $scope.statusClass[$scope.favourite] = "alert-success";
+                    console.log(childElement);
+                }
+
+                $location.path('/'+parentElement+'/menu/'+childElement);
+            }
+
+            $scope.$watch($scope.tab,function(newTab,oldTab){
+                $scope.openTab[$scope.tab] = true;
+                $scope.openChildTab[$scope.menu] = true;
+                $scope.statusClass[$scope.favourite] = "alert-success";
+                //$location.path('/'+scope.tab+'/menu/'+scope.menu);
+            });
+
 
             $scope.loadExternalLinks = function(){
 
@@ -90,28 +127,6 @@ homeDirectives.directive("homeLeftMenu", ['homeService','utilityService',functio
                     $scope.externalLinks = response;
                 });
             }
-
-
-            // get report tables
-            $scope.getReportTable = function () {
-
-                if(localStorage.getItem('reportTables')){
-                    $scope.reportTables = utilityService.prepareReportTables(JSON.parse(localStorage.getItem('reportTables')));
-                }else{
-
-                    homeService.getReportTables().then(function(data){
-                        $scope.reportTables = utilityService.prepareReportTables(data.reportTables);
-                        localStorage.setItem('reportTables',JSON.stringify(data.reportTables));
-                    },function(error){
-
-                    });
-                }
-
-
-            }
-
-            $scope.getReportTable();
-
 
 
             $scope.loadExternalLinks = function(){
@@ -123,7 +138,6 @@ homeDirectives.directive("homeLeftMenu", ['homeService','utilityService',functio
 
 
             $scope.loadExternalLinks();
-            $scope.getReportTable();
 
         }
     };
@@ -223,7 +237,7 @@ homeDirectives.directive("homeTabs", function(){
     };
 });
 
-homeDirectives.directive("newsContainer", function(){
+homeDirectives.directive("newsContainer", function($http){
     return {
         restrict: "E",
         replace: true,
@@ -232,7 +246,16 @@ homeDirectives.directive("newsContainer", function(){
         },
         templateUrl: "views/directives/news_container.html",
         link: function($scope, element, attrs) {
-
+            $scope.feeds = null;
+            var feedUrl = "https://api.rss2json.com/v1/api.json?rss_url=http%3A%2F%2Fwww.fao.org%2Fnews%2Fen%2F%3Fno_cache%3D1%26feed_id%3D16872%26key%3D33%26type%3D334"
+            $http.get(feedUrl).then(function(data){
+                if ( data.status == 200 )
+                {
+                    $scope.feeds =data.data;
+                }
+            },function(error){
+                console.log(error);
+            })
 
         }
     };

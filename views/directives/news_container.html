@@ -12,7 +12,18 @@
         </div>
         <div class="panel-body">
             <div class="feed-block">
-                <feed summary="true" url="http://www.fao.org/news/en/?no_cache=1&feed_id=16872&key=33&type=334" count="100"/>
+                <div class="media" ng-repeat="item in feeds.items">
+                    <div class="media-body">
+                        <h4 class="media-heading"><a href="{{item.link}}"  style="cursor: pointer" target="_blank">{{item.title}}</a></h4>
+                        <p>
+                            <a href="{{item.link}}" target="_blank" style="color:#646663;cursor: pointer">{{item.content}}</a>
+                        </p>
+                    <br/>
+                        <span><a href="{{item.link}}"  target="_blank" style="cursor: pointer">{{item.author}}</a> - {{item.pubDate}}</span>
+                    </div>
+                    <hr/>
+                </div>
+
             </div>
         </div>
     </div>
