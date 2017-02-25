@@ -219,21 +219,22 @@ var homeControllers = angular.module('newsControllers', [])
         $rootScope.openChildTab = [];
         $rootScope.openChildTab[$routeParams.menuId] = true;
 
-        $scope.loadMessages = function(){
+        $scope.loadMessages = function () {
             $scope.messages = [];
-            homeService.getMessages().then(function(response){
+            homeService.getMessages().then(function (response) {
 
-                if(response.messageOne){
+                if (response.messageOne) {
                     $scope.messages.push(response.messageOne);
                 }
 
-                if(response.messageTwo){
+                if (response.messageTwo) {
                     $scope.messages.push(response.messageTwo);
                 }
 
 
             });
         };
+
 
 
         // get report tables
