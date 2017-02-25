@@ -3,16 +3,15 @@
     <head>
         <title>ARDS NEWS</title>
 
-        <meta name="description" content="DHIS 2">
-        <meta name="keywords" content="DHIS 2">        
+        <meta name="description" content="ARDS">
+        <meta name="keywords" content="ARDS">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
         <!-- DHIS2 Settings initialization for a baseUrl that is used for the menu -->
         <script type="text/javascript">
             window.dhis2 = window.dhis2 || {};
             dhis2.settings = dhis2.settings || {};
-            dhis2.settings.baseUrl = 'demo';
-//          dhis2.settings.baseUrl = '../..';
+            dhis2.settings.baseUrl = '../..';
         </script>
 
         <script type="text/javascript" src="../../../dhis-web-commons/javascripts/jQuery/jquery.min.js"></script>
@@ -59,7 +58,7 @@
         <script type="text/javascript" src="../../../dhis-web-commons/javascripts/angular/angular-animate.js"></script>
         <script type="text/javascript" src="../../../dhis-web-commons/javascripts/angular/angular-sanitize.js"></script>
         <script type="text/javascript" src="../../../dhis-web-commons/javascripts/angular/angular-messages.js"></script>
-        <script type="text/javascript" src="../../../dhis-web-commons/javascripts/angular/ui-bootstrap.js"></script>
+        <script type="text/javascript" src="scripts/vendor/ui-bootstrap.js"></script>
        
         <script type="text/javascript" src="../../../dhis-web-commons/javascripts/moment/moment-with-langs.min.js"></script>
 
@@ -142,6 +141,62 @@
         <link type="text/css" rel="stylesheet" href="../../../api/files/style" />
         <script type="text/javascript" src="../../../api/files/script"></script>
 
+
+        <style>
+            .ui-state-default{
+                color:#000000!important;
+            }
+            .panel-body {
+                padding: 0px!important;
+                padding-left: 15px;
+                padding-top: 15px;
+                font-size: 9pt!important;
+            }
+
+            .panel-title {
+                font-size:9pt!important;
+                padding-left: 20px!important;
+            }
+            .bold-accordion-group-header .panel-title{
+                font-weight: bold;
+            }
+            .normal-accordion-group-header .panel-title{
+                font-weight: normal;
+            }
+
+            .normal-accordion-group-header .panel-body ul li a{
+                padding-left: 40px;
+            }
+
+            .navbar-inverse .navbar-brand {
+                color: #fff;
+            }
+            /*#mainPage*/
+            /*{*/
+                /*margin: 125px 15px 15px 10px!important;*/
+            /*}*/
+            .navbar-inverse .navbar-brand {
+                color: #ffffff!important;
+            }
+            .navbar-inverse .navbar-nav > li > a {
+                color: #ffffff!important;
+            }
+
+            ::-webkit-scrollbar {
+                width: 6px;
+            }
+
+            ::-webkit-scrollbar-track {
+                -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+                border-radius: 10px;
+            }
+
+            ::-webkit-scrollbar-thumb {
+                border-radius: 10px;
+                -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+            }
+
+        </style>
     </head>
 
     <body>

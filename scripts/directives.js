@@ -17,6 +17,7 @@ homeDirectives.directive("homeRightMenu", ['homeService',function(homeService){
             $scope.errors  = false;
             $scope.errorsThree  = false;
             $scope.errorSms  = false;
+            $scope.chartBaseUrl = dhis2.settings.baseUrl;
 
 
             $scope.$watch('messageObject', function(newmessageObject, oldmessageObject){

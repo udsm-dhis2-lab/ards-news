@@ -245,10 +245,9 @@ var homeControllers = angular.module('newsControllers', [])
         };
 
 
-
         $scope.loadRawCharts = function(){
-            homeService.getCharts().then(function(response){
-                var rowcharts = response.charts;
+            homeService.getCharts().then(function(responseRaw){
+                var rowcharts = responseRaw.charts;
                 $scope.loadCharts().then(function(response){
                     if(response){
 

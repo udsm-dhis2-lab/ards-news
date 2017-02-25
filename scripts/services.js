@@ -110,9 +110,8 @@ homeServices.service('homeService',['$http','DHIS2URL',function($http,DHIS2URL){
         angular.forEach(charts,function(chartValue,chartIndex){
             modifiedCharts.push({id:chartValue.id,name:chartValue.displayName});
         });
-
         var url = "../../../api/dataStore/chartsStorage/availableCharts";
-        return $http({method:'POST',data:modifiedCharts,url:url}).then(handleSuccess, handleError("Error storing adding charts"));
+        return $http({method:'PUT',data:modifiedCharts,url:url}).then(handleSuccess, handleError("Error storing adding charts"));
     }
 
 
@@ -123,7 +122,7 @@ homeServices.service('homeService',['$http','DHIS2URL',function($http,DHIS2URL){
 
             modifiedCharts.push({id:chartValue.id,name:chartValue.displayName});
         });
-        var url = "../../../api/dataStore/chartsStorage/selectedCharts";
+        var url = "/"+dhis2.settings.baseUrl+"api/dataStore/chartsStorage/selectedCharts";
         return $http({method:'POST',data:modifiedCharts,url:url}).then(handleSuccess, handleError("Error storing adding charts"));
     }
 
@@ -147,14 +146,14 @@ homeServices.service('homeService',['$http','DHIS2URL',function($http,DHIS2URL){
             modifiedCharts.push({icon:"<i class='fa fa-chart'></i>",id:chartValue.id,name:chartValue.displayName,ticked:true});
         });
 
-        //var url = "../../../api/dataStore/chartsStorage/availableCharts";
-        var url = "../../../api/dataStore/chartsStorage/selectedCharts";
+        //var url = "/"+dhis2.settings.baseUrl+"api/dataStore/chartsStorage/availableCharts";
+        var url = "/"+dhis2.settings.baseUrl+"/api/dataStore/chartsStorage/selectedCharts";
         return $http({method:'PUT',data:charts,url:url}).then(handleSuccess, handleError("Error storing adding charts"));
         //return $http({method:'DELETE',url:url}).then(handleSuccess, handleError("Error storing adding charts"));
     }
 
     home.getSelectedCharts = function(charts){
-        var url = "../../../api/dataStore/chartsStorage/selectedCharts";
+        var url = "/"+dhis2.settings.baseUrl+"/api/dataStore/chartsStorage/selectedCharts";
         return $http({method:'GET',data:charts,url:url}).then(handleSuccess, handleError("Error getting charts"));
     }
 
@@ -468,6 +467,7 @@ homeServices.service('homeService',['$http','DHIS2URL',function($http,DHIS2URL){
 
     home.prepareLeftMenu = function(reportTables){
 
+
         var mainmenu = new Array();
         var menuarr = [{'name':"Agriculture",values:[]},{'name':"Livestock",values:[]},{'name':"Fishery",values:[]},{'name':"Trade",values:[]},{'name':"General Information",values:[]}];
         var arrayCounter = 0;
@@ -478,7 +478,11 @@ homeServices.service('homeService',['$http','DHIS2URL',function($http,DHIS2URL){
             if(arr.length != 1){
                 angular.forEach(menuarr,function(menuValue){
                     if(arr[0] == menuValue.name){
-                        menuValue.values.push({id:value.id,displayName:arr[1],shortName:arr[1].substring(0,20)+"...",period:home.preparePeriodFromReportTables(value),orgUnit:home.prepareOrgUnitFromReportTables(value),dx:home.prepareDxFromReportTables(value),filter:value.filterDimensions[0]});
+                        var filterDimension = "pe";
+                        if (value.filterDimensions.length > 0){
+                            filterDimension = value.filterDimensions[0];
+                        }
+                        menuValue.values.push({id:value.id,displayName:arr[1],shortName:arr[1].substring(0,20)+"...",period:home.preparePeriodFromReportTables(value),orgUnit:home.prepareOrgUnitFromReportTables(value),dx:home.prepareDxFromReportTables(value),filter:filterDimension});
                     }
                 })
 
