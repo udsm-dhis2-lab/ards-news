@@ -114,7 +114,7 @@ var homeControllers = angular.module('newsControllers', [])
         }
 
         $scope.switchPage = function () {
-            window.location.href = "/" + dhis2.settings.baseUrl + '/api/apps/cms/index.html';
+            window.location.href = "/" + dhis2.settings.baseUrl + '/api/apps/ARDS-CMS/index.html';
         }
 
         $scope.loadMessages = function () {

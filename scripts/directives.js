@@ -228,7 +228,7 @@ homeDirectives.directive("homeTabs", function(){
 
 
             $scope.switchPage = function(){
-                window.location.href = '/demo/api/apps/cms/index.html';
+                window.location.href = '/demo/api/apps/ARDS-CMS/index.html';
             }
 
 
